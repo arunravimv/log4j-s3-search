@@ -10,6 +10,9 @@ import com.van.logging.PublishContext;
 import org.apache.http.entity.ContentType;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 import java.util.zip.GZIPOutputStream;
 
@@ -46,12 +49,16 @@ public class S3PublishHelper implements IPublishHelper<Event> {
 
 
     public S3PublishHelper(AmazonS3Client client, String bucket, String path, boolean compressEnabled, boolean dateWiseLogging) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/HH/mm");
+        Calendar cal = Calendar.getInstance();
+        String datePrefix = dateFormat.format(cal.getTime());
+
         this.client = client;
         this.bucket = bucket.toLowerCase();
         if (!path.endsWith("/")) {
-            this.path = path + "/";
+            this.path = path + "/"+datePrefix;
         } else {
-            this.path = path;
+            this.path = path+datePrefix;
         }
         this.compressEnabled = compressEnabled;
     }
