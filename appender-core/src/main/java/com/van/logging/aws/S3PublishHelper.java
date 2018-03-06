@@ -45,7 +45,7 @@ public class S3PublishHelper implements IPublishHelper<Event> {
     private Writer outputWriter;
 
 
-    public S3PublishHelper(AmazonS3Client client, String bucket, String path, boolean compressEnabled) {
+    public S3PublishHelper(AmazonS3Client client, String bucket, String path, boolean compressEnabled, boolean dateWiseLogging) {
         this.client = client;
         this.bucket = bucket.toLowerCase();
         if (!path.endsWith("/")) {

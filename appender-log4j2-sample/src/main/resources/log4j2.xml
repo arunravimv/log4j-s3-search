@@ -22,6 +22,7 @@
 
       <!-- Uncomment below to apply GZIP compression on content sent to S3 -->
         <!--<s3Compression>true</s3Compression>-->
+        <!--<dateWiseLogging>true</dateWiseLogging>-->
 
       <!-- Uncomment AND configure the line below to enable upload to SOLR -->
         <!--<solrUrl>http://localhost:8983/solr/gettingstarted/</solrUrl>-->

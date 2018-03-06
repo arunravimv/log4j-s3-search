@@ -55,6 +55,9 @@ public class Log4j2AppenderBuilder extends org.apache.logging.log4j.core.appende
     @PluginBuilderAttribute
     private String s3Compression;
 
+    @PluginBuilderAttribute
+    private String dateWiseLogging;
+
     // Solr properties
     @PluginBuilderAttribute
     private String solrUrl;
@@ -153,7 +156,7 @@ public class Log4j2AppenderBuilder extends org.apache.logging.log4j.core.appende
                     "Registering S3 publish helper -> %s:%s", s3Bucket, s3Path));
             }
             publisher.addHelper(new S3PublishHelper((AmazonS3Client)client,
-                s3Bucket, s3Path, Boolean.parseBoolean(s3Compression)));
+                s3Bucket, s3Path, Boolean.parseBoolean(s3Compression), Boolean.parseBoolean(dateWiseLogging)));
         });
 
         getSolrConfigurationIfEnabled(solrUrl).ifPresent(config -> {

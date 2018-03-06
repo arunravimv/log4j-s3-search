@@ -92,6 +92,7 @@ public class Log4jAppender extends AppenderSkeleton
     private ElasticsearchConfiguration elasticsearchConfiguration;
     private AmazonS3Client s3Client;
     private boolean s3Compression = false;
+    private boolean dateWiseLogging = false;
 
     private boolean verbose = false;
 
@@ -157,6 +158,10 @@ public class Log4jAppender extends AppenderSkeleton
 
     public void setS3Compression(String enable) {
         s3Compression = Boolean.parseBoolean(enable);
+    }
+
+    public void setDateWiseLogging(String enable) {
+        dateWiseLogging = Boolean.parseBoolean(enable);
     }
 
     // Solr properties
@@ -278,7 +283,7 @@ public class Log4jAppender extends AppenderSkeleton
                 System.out.println("Registering S3 publish helper");
             }
             publisher.addHelper(new S3PublishHelper(s3Client,
-                s3.getBucket(), s3.getPath(), s3Compression));
+                s3.getBucket(), s3.getPath(), s3Compression, dateWiseLogging));
         }
         if (null != solr) {
             URL solrUrl = solr.getUrl();
