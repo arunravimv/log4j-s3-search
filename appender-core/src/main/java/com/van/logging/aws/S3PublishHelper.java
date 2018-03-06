@@ -49,7 +49,7 @@ public class S3PublishHelper implements IPublishHelper<Event> {
 
 
     public S3PublishHelper(AmazonS3Client client, String bucket, String path, boolean compressEnabled, boolean dateWiseLogging) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/HH/mm");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/HH/mm/");
         Calendar cal = Calendar.getInstance();
         String datePrefix = dateFormat.format(cal.getTime());
 
